@@ -64,11 +64,16 @@ function two_blocks(ss)
     (s0, s1)
 end
 
+function psize(ss)
+    (s0, s1) = ss
+    println("$(length(s0)) $(length(s1))")
+end
+
 ss = put_pawn()
 s0 = no_block(ss)
 s1 = one_block(ss)
 s2 = two_blocks(ss)
 
-println(s0)
-println(s1)
-println(s2)
+psize(s0)
+psize(s1)
+psize(s2)

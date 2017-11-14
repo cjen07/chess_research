@@ -241,9 +241,57 @@ d3 = put_elephant(d2)
 
 # (b1, b2) = d3
 # println(length(b1)) 51
-# println(length(b2)) 2*1644
+# println(length(b2)) 2*1644=3288
+# 51 + 3288 = 3339
 
-x = 51
-y = 1644
-total = x + b(x,2) + x*y + y + b(y,1) + b(y,2)
+# x = 51
+# y = 1644
+# total = x + b(x,2) + x*y + y + b(y,1) + b(y,2)
 # println(total) 1439004
+
+(b1, b2) = d3
+
+function block_number(bs)
+    b0 = []
+    b1 = []
+    b2 = []
+    for b in bs
+        (x, y) = b
+        if x[1,1] == 0
+            if x[1,5] == 0
+                push!(b2, b)
+            else
+                push!(b1, b)
+            end
+        else
+            if x[1,5] == 0
+                push!(b1, b)
+            else
+                push!(b0, b)
+            end
+        end
+    end
+    (b0, b1, b2)
+end
+
+function pl(x)
+    println(length(x))
+end
+
+c1 = block_number(b1)
+c2 = block_number(b2)
+
+# map(x -> pl(x), c1) # 11 0 40
+# map(x -> pl(x), c2) # 108 1396 1784
+
+function number_reduce(bs)
+    ns = [0, 0, 0, 0, 0]
+    for b in bs
+        c = b[2]
+        ns[c] += 1
+    end
+    ns
+end
+
+map(x -> println(number_reduce(x)), c1)
+map(x -> println(number_reduce(x)), c2)
